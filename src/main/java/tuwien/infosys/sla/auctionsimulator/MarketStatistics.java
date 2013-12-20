@@ -30,36 +30,25 @@ public class MarketStatistics {
 		return failedAuctionsCount;
 	}
 
-	public void increaseSupplyAgentsCount(int value) {
-		supplyAgentsCount += value;
-	}
-
 	public void increaseSupplyAgentsCount() {
-		increaseSupplyAgentsCount(1);
-	}
-
-	public void increaseDemandAgentsCount(int value) {
-		demandAgentsCount += value;
+		supplyAgentsCount++;
 	}
 
 	public void increaseDemandAgentsCount() {
-		increaseDemandAgentsCount(1);
+		demandAgentsCount++;
+	}
+
+	public void increaseSuccessfulAuctionsCount() {
+		successfulAuctionsCount++;
 	}
 
 	public void increaseSuccessfulAuctionsCount(int value) {
 		successfulAuctionsCount += value;
 	}
 
-	public void increaseSuccessfulAuctionsCount() {
-		increaseSuccessfulAuctionsCount(1);
-	}
-
-	public void increaseFailedAuctionsCount(int value) {
-		failedAuctionsCount += value;
-	}
 
 	public void increaseFailedAuctionsCount() {
-		increaseFailedAuctionsCount(1);
+		failedAuctionsCount++;
 	}
 
 	public int getOverallAuctionsCount() {

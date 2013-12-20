@@ -41,6 +41,20 @@ public class Product {
 		return availabiliy && bandwith && cpu && ram && storage && latency && operatingSystem && backupAvailable && ipv6Support;
 	}
 
+	public boolean isExactMatch(Product other) {
+		return this.isFulfilledBy(other) && other.isFulfilledBy(this);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Product) {
+			Product p = (Product) o;
+			return this.isExactMatch(p);
+		} else {
+			return false;
+		}
+	}
+
 	private static boolean matchInteger(Optional<Integer> p1, Optional<Integer> p2){
 		if(p1.isPresent()){
 			return p2.isPresent() && p1.get() <= p2.get();
@@ -64,13 +78,28 @@ public class Product {
 
 		return true;
 	}
-	
+
+	//	public int getProductGroupID() {
+	//		int id = 0;
+	//		id |= (availability.isPresent() ? 1 << 0 : 0);
+	//		id |= (bandwith.isPresent() ? 1 << 1 : 0);
+	//		id |= (cpu.isPresent() ? 1 << 2 : 0);
+	//		id |= (ram.isPresent() ? 1 << 3 : 0);
+	//		id |= (storage.isPresent() ? 1 << 4 : 0);
+	//		id |= (latency.isPresent() ? 1 << 5 : 0);
+	//		id |= (operatingSystem.isPresent() ? 1 << 6 : 0);
+	//		id |= (backupAvailable.isPresent() ? 1 << 7 : 0);
+	//		id |= (ipv6Support.isPresent() ? 1 << 8 : 0);
+	//		return id;
+	//	}
+
+	@Override
 	public String toString(){
 		String out ="";
-		
+
 		if(availability.isPresent()){
 			out +="availability: "+availability.get()+" ";
-			}
+		}
 		if(bandwith.isPresent()){
 			out += "bandwith: "+bandwith.get()+" ";
 		}
@@ -95,7 +124,7 @@ public class Product {
 		if(ipv6Support.isPresent()){
 			out += "ipv6Support: "+ipv6Support.get();
 		}
-		
+
 		return out;
 	}
 
