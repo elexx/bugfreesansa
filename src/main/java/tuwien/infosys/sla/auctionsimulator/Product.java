@@ -25,44 +25,44 @@ public class Product {
 		this.backupAvailable = backupAvailable;
 		this.ipv6Support = ipv6Support;
 	}
-	
+
 	public boolean isSubset(Product other){
-		
+
 		boolean availabiliy = matchInteger(this.availability, other.availability);
 		boolean bandwith = matchInteger(this.bandwith, other.bandwith);
 		boolean cpu = matchInteger(this.cpu, other.cpu);
 		boolean ram = matchInteger(this.ram, other.ram);
 		boolean storage = matchInteger(this.storage, other.storage);
-		boolean latency = matchInteger(this.latency, other.latency);
+		boolean latency = matchInteger(other.latency, this.latency);
 		boolean operatingSystem = matchOperatingSystem(this.operatingSystem, other.operatingSystem);
 		boolean backupAvailable = matchBoolean(this.backupAvailable, other.backupAvailable);
 		boolean ipv6Support = matchBoolean(this.ipv6Support, other.ipv6Support);
-		
+
 		return availabiliy && bandwith && cpu && ram && storage && latency && operatingSystem && backupAvailable && ipv6Support;
 	}
-	
+
 	private static boolean matchInteger(Optional<Integer> p1, Optional<Integer> p2){
 		if(p1.isPresent()){
 			return p2.isPresent() && p1.get() <= p2.get();
 		}
-		
+
 		return true;
 	}
-	
+
 	private static boolean matchBoolean(Optional<Boolean> p1, Optional<Boolean> p2){
 		if(p1.isPresent() && p1.get()){
 			return p2.isPresent() && p2.get();
 		}
-		
+
 		return true;
 	}
-	
+
 	private static boolean matchOperatingSystem(Optional<OperatingSystems> p1, Optional<OperatingSystems> p2){
 		if(p1.isPresent()){
 			return p2.isPresent() && p1.get().equals(p2.get());
 		}
-		
+
 		return true;
 	}
-	
+
 }
