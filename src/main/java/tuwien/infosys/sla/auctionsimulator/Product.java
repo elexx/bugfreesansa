@@ -64,5 +64,39 @@ public class Product {
 
 		return true;
 	}
+	
+	public String toString(){
+		String out ="";
+		
+		if(availability.isPresent()){
+			out +="availability: "+availability.get()+" ";
+			}
+		if(bandwith.isPresent()){
+			out += "bandwith: "+bandwith.get()+" ";
+		}
+		if(cpu.isPresent()){
+			out += "cpu: "+cpu.get()+" ";
+		}
+		if(ram.isPresent()){
+			out += "ram: "+ram.get()+" ";
+		}
+		if(storage.isPresent()){
+			out += "storage: "+storage.get()+" ";
+		}
+		if(latency.isPresent()){
+			out += "latency: "+latency.get()+" ";
+		}
+		if(operatingSystem.isPresent()){
+			out += "operatingSystem: "+operatingSystem.get()+" ";
+		}
+		if(backupAvailable.isPresent()){
+			out += "backupAvailable: "+backupAvailable.get()+" ";
+		}
+		if(ipv6Support.isPresent()){
+			out += "ipv6Support: "+ipv6Support.get();
+		}
+		
+		return out;
+	}
 
 }

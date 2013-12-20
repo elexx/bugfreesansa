@@ -82,6 +82,28 @@ public class ProductBuilder {
 		this.ipv6Support = ipv6Support;
 		return this;
 	}
+	
+	public int size(){
+		int count =0;
+		if(availability != null)
+			count++;
+		if(bandwith != null)
+			count++;
+		if(cpu != null)
+			count++;
+		if(ram != null)
+			count++;
+		if(storage != null)
+			count++;
+		if(operatingSystem != null)
+			count++;
+		if(backupAvailable != null)
+			count++;
+		if(ipv6Support != null)
+			count++;
+		
+		return count;
+	}
 
 	public Product build() {
 		return new Product(Optional.fromNullable(availability), Optional.fromNullable(bandwith), Optional.fromNullable(cpu), Optional.fromNullable(ram), Optional.fromNullable(storage), Optional.fromNullable(latency), Optional.fromNullable(operatingSystem), Optional.fromNullable(backupAvailable), Optional.fromNullable(ipv6Support));
