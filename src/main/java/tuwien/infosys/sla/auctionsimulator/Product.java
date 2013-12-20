@@ -26,7 +26,7 @@ public class Product {
 		this.ipv6Support = ipv6Support;
 	}
 
-	public boolean isSubset(Product other){
+	public boolean isFulfilledBy(Product other){
 
 		boolean availabiliy = matchInteger(this.availability, other.availability);
 		boolean bandwith = matchInteger(this.bandwith, other.bandwith);

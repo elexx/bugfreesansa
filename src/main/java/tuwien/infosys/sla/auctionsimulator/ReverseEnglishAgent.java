@@ -38,6 +38,9 @@ public class ReverseEnglishAgent extends Agent implements SupplyDemandAuctionabl
 			}
 		} while (takers.size() > 1);
 
+		if(takers.size() == 0)
+			return Optional.absent();
+		
 		return Optional.fromNullable(takers.get(0));
 	}
 }
