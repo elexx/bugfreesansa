@@ -11,8 +11,7 @@ import com.google.common.collect.Sets;
 public class Market {
 
 	private static final Market MARKET = new Market();
-
-	private int currentMarketTimeslot;
+	
 	private final MarketStatistics reverseEnglishStatistics;
 	private final MarketStatistics dutchStatistics;
 
@@ -21,11 +20,6 @@ public class Market {
 
 	private final Multimap<Integer, DutchAgent> dutchSellerList;
 	private final Set<DutchAgent> dutchBuyerList;
-
-
-	public static Market getInstance() {
-		return Market.MARKET;
-	}
 
 	private Market() {
 		reverseEnglishSellerList = Sets.newLinkedHashSet();
@@ -36,36 +30,40 @@ public class Market {
 		dutchBuyerList = Sets.newLinkedHashSet();
 		dutchStatistics = new MarketStatistics();
 	}
+	
+	public static Market getInstance() {
+		return Market.MARKET;
+	}	
 
-	void registerInterestReverseEnglish(ReverseEnglishAgent agent) {
+	public void registerInterestReverseEnglish(ReverseEnglishAgent agent) {
 		reverseEnglishStatistics.increaseSupplyAgentsCount();
 		reverseEnglishSellerList.add(agent);
 	}
 
-	void createReverseEnglish(ReverseEnglishAgent agent, int duration) {
+	public void createReverseEnglish(ReverseEnglishAgent agent, int timeSlot) {
 		reverseEnglishStatistics.increaseDemandAgentsCount();
-		reverseEnglishBuyerList.put(currentMarketTimeslot + duration, agent);
+		reverseEnglishBuyerList.put(timeSlot, agent);
 	}
 
-	void registerInterestDutch(DutchAgent agent) {
+	public void registerInterestDutch(DutchAgent agent) {
 		dutchStatistics.increaseDemandAgentsCount();
 		dutchBuyerList.add(agent);
 	}
 
-	void createDutch(DutchAgent agent, int duration) {
+	public void createDutch(DutchAgent agent, int timeSlot) {
 		dutchStatistics.increaseSupplyAgentsCount();
-		dutchSellerList.put(currentMarketTimeslot + duration, agent);
+		dutchSellerList.put(timeSlot, agent);
 	}
 
-	void registerInterestDoubleSeller(Agent self, int price) {
+	public void registerInterestDoubleSeller(Agent self, int price) {
 	} /* Eventuell ist "Agent self" unnötig */
 
-	void registerInterestDoubleBuyer(Agent self, int price) {
+	public void registerInterestDoubleBuyer(Agent self, int price) {
 	} /* Eventuell ist "Agent self" unnötig */
-
-	public void runAuction() {
-
-		for (ReverseEnglishAgent buyer : reverseEnglishBuyerList.get(currentMarketTimeslot)) {
+	
+	
+	public void runReverseEnglishAuction(int time){
+		for (ReverseEnglishAgent buyer : reverseEnglishBuyerList.get(time)) {
 			List<ReverseEnglishAgent> takers = Lists.newLinkedList();
 			for (ReverseEnglishAgent seller : reverseEnglishSellerList) {
 				if (buyer.getProduct().isFulfilledBy(seller.getProduct())) {
@@ -80,9 +78,13 @@ public class Market {
 			} else {
 				reverseEnglishStatistics.increaseFailedAuctionsCount();
 			}
-		}
-
-		for(DutchAgent seller: dutchSellerList.get(currentMarketTimeslot)){
+		}		
+		
+		reverseEnglishBuyerList.removeAll(time);
+	}
+	
+	public void runDutchAuction(int time){
+		for(DutchAgent seller: dutchSellerList.get(time)){
 			List<DutchAgent> takers = Lists.newLinkedList();
 			for(DutchAgent buyer : dutchBuyerList){
 				if (buyer.getProduct().isFulfilledBy(seller.getProduct())) {
@@ -99,10 +101,11 @@ public class Market {
 			}			
 		}
 
-		reverseEnglishBuyerList.removeAll(currentMarketTimeslot);
-		dutchSellerList.removeAll(currentMarketTimeslot);
+		dutchSellerList.removeAll(time);		
+	}
 
-		currentMarketTimeslot++;
+	public void runDoubleAuction(){
+		
 	}
 
 	public MarketStatistics getReverseEnglishStatistics() {
@@ -112,6 +115,5 @@ public class Market {
 	public MarketStatistics getDutchStatistics(){
 		return dutchStatistics;
 	}
-
-
+	
 }
