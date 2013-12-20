@@ -1,14 +1,10 @@
 package tuwien.infosys.sla.auctionsimulator;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
-
 import com.google.common.base.Optional;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
@@ -25,8 +21,7 @@ public class Market {
 
 	private final Multimap<Integer, DutchAgent> dutchSellerList;
 	private final Set<DutchAgent> dutchBuyerList;
-	private final HashMap<UUID, DutchAgent> dutchWinnerList;
-	private final Set<UUID> dutchFailedAuctionList;
+
 
 	public static Market getInstance() {
 		return Market.MARKET;
@@ -35,13 +30,10 @@ public class Market {
 	private Market() {
 		reverseEnglishSellerList = Sets.newLinkedHashSet();
 		reverseEnglishBuyerList = HashMultimap.create();
+		reverseEnglishStatistics = new MarketStatistics();
 
 		dutchSellerList = HashMultimap.create();
 		dutchBuyerList = Sets.newLinkedHashSet();
-		dutchWinnerList = Maps.newLinkedHashMap();
-		dutchFailedAuctionList = Sets.newLinkedHashSet();
-
-		reverseEnglishStatistics = new MarketStatistics();
 		dutchStatistics = new MarketStatistics();
 	}
 
@@ -76,22 +68,36 @@ public class Market {
 		for (ReverseEnglishAgent buyer : reverseEnglishBuyerList.get(currentMarketTimeslot)) {
 			List<ReverseEnglishAgent> takers = Lists.newLinkedList();
 			for (ReverseEnglishAgent seller : reverseEnglishSellerList) {
-				if (buyer.getProduct().isSubset(seller.getProduct())) {
+				if (buyer.getProduct().isFulfilledBy(seller.getProduct())) {
 					takers.add(seller);
 				}
 			}
 
 			Optional<? extends SupplyDemandAuctionable> winner = buyer.startAuction(takers);
 			if (winner.isPresent()) {
-				System.out.println(winner);
 				reverseEnglishStatistics.increaseSuccessfulAuctionsCount();
-				reverseEnglishSellerList.remove(winner);
+				reverseEnglishSellerList.remove(winner.get());
 			} else {
 				reverseEnglishStatistics.increaseFailedAuctionsCount();
 			}
 		}
 
-		//todo: other auctions
+		for(DutchAgent seller: dutchSellerList.get(currentMarketTimeslot)){
+			List<DutchAgent> takers = Lists.newLinkedList();
+			for(DutchAgent buyer : dutchBuyerList){
+				if (buyer.getProduct().isFulfilledBy(seller.getProduct())) {
+					takers.add(buyer);
+				}
+			}
+			
+			Optional<? extends SupplyDemandAuctionable> winner = seller.startAuction(takers);
+			if (winner.isPresent()) {
+				dutchStatistics.increaseSuccessfulAuctionsCount();
+				dutchBuyerList.remove(winner.get());
+			} else {
+				dutchStatistics.increaseFailedAuctionsCount();
+			}			
+		}
 
 		reverseEnglishBuyerList.removeAll(currentMarketTimeslot);
 		dutchSellerList.removeAll(currentMarketTimeslot);
@@ -101,6 +107,10 @@ public class Market {
 
 	public MarketStatistics getReverseEnglishStatistics() {
 		return reverseEnglishStatistics;
+	}
+	
+	public MarketStatistics getDutchStatistics(){
+		return dutchStatistics;
 	}
 
 
