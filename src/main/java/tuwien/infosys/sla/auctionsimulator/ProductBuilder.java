@@ -81,6 +81,9 @@ public class ProductBuilder {
 		return this;
 	}
 
+	/**
+	 * @return the number of already set parameters
+	 */
 	public int size() {
 		int count = 0;
 		if (availability != null)
