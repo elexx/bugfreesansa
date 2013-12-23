@@ -119,4 +119,37 @@ public class ProductBuilderTest {
 		fail();
 	}
 
+	@Test
+	public void countTest() {
+		ProductBuilder builder = ProductBuilder.newBuilder();
+
+		builder.availability(100);
+		assertThat(builder.size(), is(1));
+
+		builder.bandwith(100);
+		assertThat(builder.size(), is(2));
+
+		builder.cpu(1);
+		assertThat(builder.size(), is(3));
+
+		builder.ram(1);
+		assertThat(builder.size(), is(4));
+
+		builder.storage(1024);
+		assertThat(builder.size(), is(5));
+
+		builder.latency(10);
+		assertThat(builder.size(), is(6));
+
+		builder.operatingSystem(OperatingSystems.LINUX);
+		assertThat(builder.size(), is(7));
+
+		builder.backupAvailable(true);
+		assertThat(builder.size(), is(8));
+
+		builder.ipv6Support(false);
+		assertThat(builder.size(), is(9));
+
+	}
+
 }
