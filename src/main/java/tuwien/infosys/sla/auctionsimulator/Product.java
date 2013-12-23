@@ -98,15 +98,15 @@ public class Product {
 	public String toString() {
 		// @formatter:off
 		return Objects.toStringHelper(this)
-				.add("availability", availability.get())
-				.add("bandwith", bandwith.get())
-				.add("cpu", cpu.get())
-				.add("ram", ram.get())
-				.add("storage", storage.get())
-				.add("latency", latency.get())
-				.add("operatingSystem", operatingSystem.get())
-				.add("backupAvailable", backupAvailable.get())
-				.add("ipv6Support", ipv6Support.get())
+				.add("availability", availability.orNull())
+				.add("bandwith", bandwith.orNull())
+				.add("cpu", cpu.orNull())
+				.add("ram", ram.orNull())
+				.add("storage", storage.orNull())
+				.add("latency", latency.orNull())
+				.add("operatingSystem", operatingSystem.orNull())
+				.add("backupAvailable", backupAvailable.orNull())
+				.add("ipv6Support", ipv6Support.orNull())
 				.toString();
 		// @formatter:on
 	}
