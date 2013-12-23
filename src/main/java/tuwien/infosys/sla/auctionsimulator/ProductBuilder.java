@@ -6,12 +6,12 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Range;
 
 public class ProductBuilder {
-	private static Range<Integer> allowedAvailability = Range.closed(85, 100);
-	private static Range<Integer> allowedBandwith = Range.closed(100, 10000);
-	private static Range<Integer> allowedCpu = Range.closed(1, 16);
-	private static Range<Integer> allowedRam = Range.closed(1, 32);
-	private static Range<Integer> allowedStorage = Range.closed(128, 1024);
-	private static Range<Integer> allowedLatency = Range.closed(5, 250);
+	private static final Range<Integer> ALLOWED_AVAILABILITY = Range.closed(85, 100);
+	private static final Range<Integer> ALLOWED_BANDWIDTH = Range.closed(100, 10000);
+	private static final Range<Integer> ALLOWED_CPU = Range.closed(1, 16);
+	private static final Range<Integer> ALLOWED_RAM = Range.closed(1, 32);
+	private static final Range<Integer> ALLOWED_STORAGE = Range.closed(128, 1024);
+	private static final Range<Integer> ALLOWED_LATENCY = Range.closed(5, 250);
 
 	private Integer availability;
 	private Integer bandwith;
@@ -31,37 +31,37 @@ public class ProductBuilder {
 	}
 
 	public ProductBuilder availability(Integer availability) {
-		checkArgument(allowedAvailability.contains(availability), "availability should be between %s and %s", allowedAvailability.lowerEndpoint(), allowedAvailability.upperEndpoint());
+		checkArgument(ProductBuilder.ALLOWED_AVAILABILITY.contains(availability), "availability should be between %s and %s", ProductBuilder.ALLOWED_AVAILABILITY.lowerEndpoint(), ProductBuilder.ALLOWED_AVAILABILITY.upperEndpoint());
 		this.availability = availability;
 		return this;
 	}
 
 	public ProductBuilder bandwith(Integer bandwith) {
-		checkArgument(allowedBandwith.contains(bandwith), "bandwith should be between %s and %s", allowedBandwith.lowerEndpoint(), allowedBandwith.upperEndpoint());
+		checkArgument(ProductBuilder.ALLOWED_BANDWIDTH.contains(bandwith), "bandwith should be between %s and %s", ProductBuilder.ALLOWED_BANDWIDTH.lowerEndpoint(), ProductBuilder.ALLOWED_BANDWIDTH.upperEndpoint());
 		this.bandwith = bandwith;
 		return this;
 	}
 
 	public ProductBuilder cpu(Integer cpu) {
-		checkArgument(allowedCpu.contains(cpu), "cpu should be between %s and %s", allowedCpu.lowerEndpoint(), allowedCpu.upperEndpoint());
+		checkArgument(ProductBuilder.ALLOWED_CPU.contains(cpu), "cpu should be between %s and %s", ProductBuilder.ALLOWED_CPU.lowerEndpoint(), ProductBuilder.ALLOWED_CPU.upperEndpoint());
 		this.cpu = cpu;
 		return this;
 	}
 
 	public ProductBuilder ram(Integer ram) {
-		checkArgument(allowedRam.contains(ram), "ram should be between %s and %s", allowedRam.lowerEndpoint(), allowedRam.upperEndpoint());
+		checkArgument(ProductBuilder.ALLOWED_RAM.contains(ram), "ram should be between %s and %s", ProductBuilder.ALLOWED_RAM.lowerEndpoint(), ProductBuilder.ALLOWED_RAM.upperEndpoint());
 		this.ram = ram;
 		return this;
 	}
 
 	public ProductBuilder storage(Integer storage) {
-		checkArgument(allowedStorage.contains(storage), "storage should be between %s and %s", allowedStorage.lowerEndpoint(), allowedStorage.upperEndpoint());
+		checkArgument(ProductBuilder.ALLOWED_STORAGE.contains(storage), "storage should be between %s and %s", ProductBuilder.ALLOWED_STORAGE.lowerEndpoint(), ProductBuilder.ALLOWED_STORAGE.upperEndpoint());
 		this.storage = storage;
 		return this;
 	}
 
 	public ProductBuilder latency(Integer latency) {
-		checkArgument(allowedLatency.contains(latency), "latency should be between %s and %s", allowedLatency.lowerEndpoint(), allowedLatency.upperEndpoint());
+		checkArgument(ProductBuilder.ALLOWED_LATENCY.contains(latency), "latency should be between %s and %s", ProductBuilder.ALLOWED_LATENCY.lowerEndpoint(), ProductBuilder.ALLOWED_LATENCY.upperEndpoint());
 		this.latency = latency;
 		return this;
 	}
