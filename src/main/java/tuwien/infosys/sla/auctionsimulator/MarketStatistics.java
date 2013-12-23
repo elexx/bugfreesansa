@@ -46,7 +46,6 @@ public class MarketStatistics {
 		successfulAuctionsCount += value;
 	}
 
-
 	public void increaseFailedAuctionsCount() {
 		failedAuctionsCount++;
 	}

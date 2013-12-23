@@ -1,6 +1,5 @@
 package tuwien.infosys.sla.auctionsimulator;
 
-
 public abstract class Agent {
 
 	protected static final int BIDDING_STEP = 10;

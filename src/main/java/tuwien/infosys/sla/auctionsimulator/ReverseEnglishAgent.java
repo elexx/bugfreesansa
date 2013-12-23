@@ -11,7 +11,6 @@ public class ReverseEnglishAgent extends Agent implements SupplyDemandAuctionabl
 		super(minPrice, maxPrice, product);
 	}
 
-
 	public Optional<Integer> requestBid(int currentBid) {
 		if (currentBid - Agent.BIDDING_STEP >= this.minPrice) {
 			return Optional.of(currentBid - Agent.BIDDING_STEP);
@@ -38,9 +37,9 @@ public class ReverseEnglishAgent extends Agent implements SupplyDemandAuctionabl
 			}
 		} while (takers.size() > 1);
 
-		if(takers.size() == 0)
+		if (takers.size() == 0)
 			return Optional.absent();
-		
+
 		return Optional.fromNullable(takers.get(0));
 	}
 }

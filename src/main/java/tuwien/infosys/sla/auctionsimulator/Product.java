@@ -26,7 +26,7 @@ public class Product {
 		this.ipv6Support = ipv6Support;
 	}
 
-	public boolean isFulfilledBy(Product other){
+	public boolean isFulfilledBy(Product other) {
 
 		boolean availabiliy = matchInteger(this.availability, other.availability);
 		boolean bandwith = matchInteger(this.bandwith, other.bandwith);
@@ -55,24 +55,24 @@ public class Product {
 		}
 	}
 
-	private static boolean matchInteger(Optional<Integer> p1, Optional<Integer> p2){
-		if(p1.isPresent()){
+	private static boolean matchInteger(Optional<Integer> p1, Optional<Integer> p2) {
+		if (p1.isPresent()) {
 			return p2.isPresent() && p1.get() <= p2.get();
 		}
 
 		return true;
 	}
 
-	private static boolean matchBoolean(Optional<Boolean> p1, Optional<Boolean> p2){
-		if(p1.isPresent() && p1.get()){
+	private static boolean matchBoolean(Optional<Boolean> p1, Optional<Boolean> p2) {
+		if (p1.isPresent() && p1.get()) {
 			return p2.isPresent() && p2.get();
 		}
 
 		return true;
 	}
 
-	private static boolean matchOperatingSystem(Optional<OperatingSystems> p1, Optional<OperatingSystems> p2){
-		if(p1.isPresent()){
+	private static boolean matchOperatingSystem(Optional<OperatingSystems> p1, Optional<OperatingSystems> p2) {
+		if (p1.isPresent()) {
 			return p2.isPresent() && p1.get().equals(p2.get());
 		}
 
@@ -94,35 +94,35 @@ public class Product {
 	//	}
 
 	@Override
-	public String toString(){
-		String out ="";
+	public String toString() {
+		String out = "";
 
-		if(availability.isPresent()){
-			out +="availability: "+availability.get()+" ";
+		if (availability.isPresent()) {
+			out += "availability: " + availability.get() + " ";
 		}
-		if(bandwith.isPresent()){
-			out += "bandwith: "+bandwith.get()+" ";
+		if (bandwith.isPresent()) {
+			out += "bandwith: " + bandwith.get() + " ";
 		}
-		if(cpu.isPresent()){
-			out += "cpu: "+cpu.get()+" ";
+		if (cpu.isPresent()) {
+			out += "cpu: " + cpu.get() + " ";
 		}
-		if(ram.isPresent()){
-			out += "ram: "+ram.get()+" ";
+		if (ram.isPresent()) {
+			out += "ram: " + ram.get() + " ";
 		}
-		if(storage.isPresent()){
-			out += "storage: "+storage.get()+" ";
+		if (storage.isPresent()) {
+			out += "storage: " + storage.get() + " ";
 		}
-		if(latency.isPresent()){
-			out += "latency: "+latency.get()+" ";
+		if (latency.isPresent()) {
+			out += "latency: " + latency.get() + " ";
 		}
-		if(operatingSystem.isPresent()){
-			out += "operatingSystem: "+operatingSystem.get()+" ";
+		if (operatingSystem.isPresent()) {
+			out += "operatingSystem: " + operatingSystem.get() + " ";
 		}
-		if(backupAvailable.isPresent()){
-			out += "backupAvailable: "+backupAvailable.get()+" ";
+		if (backupAvailable.isPresent()) {
+			out += "backupAvailable: " + backupAvailable.get() + " ";
 		}
-		if(ipv6Support.isPresent()){
-			out += "ipv6Support: "+ipv6Support.get();
+		if (ipv6Support.isPresent()) {
+			out += "ipv6Support: " + ipv6Support.get();
 		}
 
 		return out;

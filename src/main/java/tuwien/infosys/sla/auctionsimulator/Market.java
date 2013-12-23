@@ -75,8 +75,7 @@ public class Market {
 		doubleBuyerList.add(agent);
 	}
 
-
-	public void runReverseEnglishAuction(int time){
+	public void runReverseEnglishAuction(int time) {
 		for (ReverseEnglishAgent buyer : reverseEnglishBuyerList.get(time)) {
 			List<ReverseEnglishAgent> takers = Lists.newLinkedList();
 			for (ReverseEnglishAgent seller : reverseEnglishSellerList) {
@@ -97,10 +96,10 @@ public class Market {
 		reverseEnglishBuyerList.removeAll(time);
 	}
 
-	public void runDutchAuction(int time){
-		for(DutchAgent seller: dutchSellerList.get(time)){
+	public void runDutchAuction(int time) {
+		for (DutchAgent seller : dutchSellerList.get(time)) {
 			List<DutchAgent> takers = Lists.newLinkedList();
-			for(DutchAgent buyer : dutchBuyerList){
+			for (DutchAgent buyer : dutchBuyerList) {
 				if (buyer.getProduct().isFulfilledBy(seller.getProduct())) {
 					takers.add(buyer);
 				}
@@ -154,7 +153,7 @@ public class Market {
 				int counter = 0;
 				while (buyerIterator.hasNext() && counter < sellerProductGroups.get(p).size()) {
 					DoubleAgent agent = buyerIterator.next();
-					if (agent.getBuyerBid() >= price ) {
+					if (agent.getBuyerBid() >= price) {
 						winners.add(agent);
 						counter++;
 					}
@@ -162,7 +161,7 @@ public class Market {
 
 				doubleBuyerList.removeAll(winners);
 				sellerIterator = sellerProductGroups.get(p).iterator();
-				for(int i = 0; i < counter; i++){
+				for (int i = 0; i < counter; i++) {
 					doubleSellerList.remove(sellerIterator.next());
 				}
 
@@ -177,7 +176,7 @@ public class Market {
 		return reverseEnglishStatistics;
 	}
 
-	public MarketStatistics getDutchStatistics(){
+	public MarketStatistics getDutchStatistics() {
 		return dutchStatistics;
 	}
 

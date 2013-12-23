@@ -5,7 +5,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.base.Optional;
 import com.google.common.collect.Range;
 
-
 public class ProductBuilder {
 	private static Range<Integer> allowedAvailability = Range.closed(85, 100);
 	private static Range<Integer> allowedBandwith = Range.closed(100, 10000);
@@ -30,7 +29,6 @@ public class ProductBuilder {
 	public static ProductBuilder newBuilder() {
 		return new ProductBuilder();
 	}
-
 
 	public ProductBuilder availability(Integer availability) {
 		checkArgument(allowedAvailability.contains(availability), "availability should be between %s and %s", allowedAvailability.lowerEndpoint(), allowedAvailability.upperEndpoint());
@@ -82,26 +80,26 @@ public class ProductBuilder {
 		this.ipv6Support = ipv6Support;
 		return this;
 	}
-	
-	public int size(){
-		int count =0;
-		if(availability != null)
+
+	public int size() {
+		int count = 0;
+		if (availability != null)
 			count++;
-		if(bandwith != null)
+		if (bandwith != null)
 			count++;
-		if(cpu != null)
+		if (cpu != null)
 			count++;
-		if(ram != null)
+		if (ram != null)
 			count++;
-		if(storage != null)
+		if (storage != null)
 			count++;
-		if(operatingSystem != null)
+		if (operatingSystem != null)
 			count++;
-		if(backupAvailable != null)
+		if (backupAvailable != null)
 			count++;
-		if(ipv6Support != null)
+		if (ipv6Support != null)
 			count++;
-		
+
 		return count;
 	}
 
