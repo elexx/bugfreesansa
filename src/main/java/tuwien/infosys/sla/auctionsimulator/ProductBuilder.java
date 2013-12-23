@@ -93,6 +93,8 @@ public class ProductBuilder {
 			count++;
 		if (storage != null)
 			count++;
+		if (latency != null)
+			count++;
 		if (operatingSystem != null)
 			count++;
 		if (backupAvailable != null)
