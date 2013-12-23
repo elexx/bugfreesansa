@@ -1,5 +1,7 @@
 package tuwien.infosys.sla.auctionsimulator;
 
+import com.google.common.base.Objects;
+
 public class MarketStatistics {
 
 	private int supplyAgentsCount;
@@ -56,7 +58,14 @@ public class MarketStatistics {
 
 	@Override
 	public String toString() {
-		return "Supply Agents: " + supplyAgentsCount + " Demand Agents: " + demandAgentsCount + " Successful Auctions: " + successfulAuctionsCount + " Failed Auctions: " + failedAuctionsCount;
+		// @formatter:off
+		return Objects.toStringHelper(this)
+				.add("Supply Agents", supplyAgentsCount)
+				.add("Demand Agents", demandAgentsCount)
+				.add("Successful Auctions", successfulAuctionsCount)
+				.add("Failed Auctions", failedAuctionsCount)
+				.toString();
+		// @formatter:on
 	}
 
 }

@@ -1,5 +1,6 @@
 package tuwien.infosys.sla.auctionsimulator;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 
 public class Product {
@@ -95,37 +96,19 @@ public class Product {
 
 	@Override
 	public String toString() {
-		String out = "";
-
-		if (availability.isPresent()) {
-			out += "availability: " + availability.get() + " ";
-		}
-		if (bandwith.isPresent()) {
-			out += "bandwith: " + bandwith.get() + " ";
-		}
-		if (cpu.isPresent()) {
-			out += "cpu: " + cpu.get() + " ";
-		}
-		if (ram.isPresent()) {
-			out += "ram: " + ram.get() + " ";
-		}
-		if (storage.isPresent()) {
-			out += "storage: " + storage.get() + " ";
-		}
-		if (latency.isPresent()) {
-			out += "latency: " + latency.get() + " ";
-		}
-		if (operatingSystem.isPresent()) {
-			out += "operatingSystem: " + operatingSystem.get() + " ";
-		}
-		if (backupAvailable.isPresent()) {
-			out += "backupAvailable: " + backupAvailable.get() + " ";
-		}
-		if (ipv6Support.isPresent()) {
-			out += "ipv6Support: " + ipv6Support.get();
-		}
-
-		return out;
+		// @formatter:off
+		return Objects.toStringHelper(this)
+				.add("availability", availability.get())
+				.add("bandwith", bandwith.get())
+				.add("cpu", cpu.get())
+				.add("ram", ram.get())
+				.add("storage", storage.get())
+				.add("latency", latency.get())
+				.add("operatingSystem", operatingSystem.get())
+				.add("backupAvailable", backupAvailable.get())
+				.add("ipv6Support", ipv6Support.get())
+				.toString();
+		// @formatter:on
 	}
 
 }
