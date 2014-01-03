@@ -24,6 +24,10 @@ public class MarketStatistics {
 		return demandAgentsCount;
 	}
 
+	public int getTotalAgentsCount() {
+		return supplyAgentsCount + demandAgentsCount;
+	}
+
 	public int getSuccessfulAuctionsCount() {
 		return successfulAuctionsCount;
 	}
@@ -54,6 +58,14 @@ public class MarketStatistics {
 
 	public int getOverallAuctionsCount() {
 		return successfulAuctionsCount + failedAuctionsCount;
+	}
+
+	public float getSuccessRate() {
+		return successfulAuctionsCount == 0 ? 0 : (successfulAuctionsCount * 2F) / (supplyAgentsCount + demandAgentsCount);
+	}
+
+	public float getFailureRate() {
+		return 1 - getSuccessRate();
 	}
 
 	@Override

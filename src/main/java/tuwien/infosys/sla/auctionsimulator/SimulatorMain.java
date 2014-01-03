@@ -41,12 +41,10 @@ public class SimulatorMain {
 			seller = amount - buyer;
 			for (int i = 0; i < seller; i++) {
 				ReverseEnglishAgent agent = agentGenerator.generateReverseEnglishAgent(minParamAmount, maxParamAmount);
-				System.out.println(agent);
 				market.registerInterestReverseEnglish(agent);
 			}
 			for(int i = 0; i < buyer; i++) {
 				ReverseEnglishAgent agent = agentGenerator.generateReverseEnglishAgent(minParamAmount, maxParamAmount);
-				System.out.println(agent);
 				market.createReverseEnglish(agent, genTimeSlot(config.getLifespan(), timeSlot));
 			}
 
@@ -81,9 +79,13 @@ public class SimulatorMain {
 
 		}
 
-		System.out.println("RE " + market.getReverseEnglishStatistics());
-		System.out.println("DU " + market.getDutchStatistics());
-		System.out.println("DO " + market.getDoubleStatistics());
+		/*
+		 * STATISTICS
+		 */
+		System.out.println("RE " + market.getReverseEnglishStatistics() + ": " + market.getReverseEnglishStatistics().getSuccessRate());
+		System.out.println("DU " + market.getDutchStatistics() + ": " + market.getDutchStatistics().getSuccessRate());
+		System.out.println("DO " + market.getDoubleStatistics() + ": " + market.getDoubleStatistics().getSuccessRate());
+		System.out.println("Overall: " + ((market.getReverseEnglishStatistics().getSuccessfulAuctionsCount() + market.getDutchStatistics().getSuccessfulAuctionsCount() + market.getDoubleStatistics().getSuccessfulAuctionsCount()) * 2F) / (market.getReverseEnglishStatistics().getTotalAgentsCount() + market.getDutchStatistics().getTotalAgentsCount() + market.getDoubleStatistics().getTotalAgentsCount()));
 	}
 
 	private static int genTimeSlot(int lifeSpan, int currentTime) {
