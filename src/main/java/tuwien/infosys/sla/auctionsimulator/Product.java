@@ -28,14 +28,13 @@ public class Product {
 	}
 
 	public boolean isFulfilledBy(Product other) {
-
 		boolean availabiliy = matchInteger(this.availability, other.availability);
 		boolean bandwith = matchInteger(this.bandwith, other.bandwith);
 		boolean cpu = matchInteger(this.cpu, other.cpu);
 		boolean ram = matchInteger(this.ram, other.ram);
 		boolean storage = matchInteger(this.storage, other.storage);
 		boolean latency = matchInteger(other.latency, this.latency);
-		boolean operatingSystem = matchOperatingSystem(this.operatingSystem, other.operatingSystem);
+		boolean operatingSystem = matchObject(this.operatingSystem, other.operatingSystem);
 		boolean backupAvailable = matchBoolean(this.backupAvailable, other.backupAvailable);
 		boolean ipv6Support = matchBoolean(this.ipv6Support, other.ipv6Support);
 
@@ -50,49 +49,51 @@ public class Product {
 	public boolean equals(Object o) {
 		if (o instanceof Product) {
 			Product p = (Product) o;
-			return this.isExactMatch(p);
+			return isExactMatch(p);
 		} else {
 			return false;
 		}
 	}
 
-	private static boolean matchInteger(Optional<Integer> p1, Optional<Integer> p2) {
-		if (p1.isPresent()) {
-			return p2.isPresent() && p1.get() <= p2.get();
-		}
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(availability, bandwith, cpu, ram, storage, latency, operatingSystem, backupAvailable, ipv6Support);
+	}
 
-		return true;
+	private static boolean matchInteger(Optional<Integer> p1, Optional<Integer> p2) {
+		if (p1.isPresent() && p2.isPresent()) {
+			return p1.get() <= p2.get();
+		}
+		return !p1.isPresent() && !p2.isPresent();
 	}
 
 	private static boolean matchBoolean(Optional<Boolean> p1, Optional<Boolean> p2) {
-		if (p1.isPresent() && p1.get()) {
-			return p2.isPresent() && p2.get();
+		if (p1.isPresent() && p2.isPresent()) {
+			return p1.get() == p2.get();
 		}
-
-		return true;
+		return !p1.isPresent() && !p2.isPresent();
 	}
 
-	private static boolean matchOperatingSystem(Optional<OperatingSystem> p1, Optional<OperatingSystem> p2) {
-		if (p1.isPresent()) {
-			return p2.isPresent() && p1.get().equals(p2.get());
+	private static boolean matchObject(Optional<? extends Object> p1, Optional<? extends Object> p2) {
+		if (p1.isPresent() && p2.isPresent()) {
+			return p1.get().equals(p2.get());
 		}
-
-		return true;
+		return !p1.isPresent() && !p2.isPresent();
 	}
 
-	//	public int getProductGroupID() {
-	//		int id = 0;
-	//		id |= (availability.isPresent() ? 1 << 0 : 0);
-	//		id |= (bandwith.isPresent() ? 1 << 1 : 0);
-	//		id |= (cpu.isPresent() ? 1 << 2 : 0);
-	//		id |= (ram.isPresent() ? 1 << 3 : 0);
-	//		id |= (storage.isPresent() ? 1 << 4 : 0);
-	//		id |= (latency.isPresent() ? 1 << 5 : 0);
-	//		id |= (operatingSystem.isPresent() ? 1 << 6 : 0);
-	//		id |= (backupAvailable.isPresent() ? 1 << 7 : 0);
-	//		id |= (ipv6Support.isPresent() ? 1 << 8 : 0);
-	//		return id;
-	//	}
+	public int getProductGroupID() {
+		int id = 0;
+		id |= (availability.isPresent() ? 1 << 0 : 0);
+		id |= (bandwith.isPresent() ? 1 << 1 : 0);
+		id |= (cpu.isPresent() ? 1 << 2 : 0);
+		id |= (ram.isPresent() ? 1 << 3 : 0);
+		id |= (storage.isPresent() ? 1 << 4 : 0);
+		id |= (latency.isPresent() ? 1 << 5 : 0);
+		id |= (operatingSystem.isPresent() ? 1 << 6 : 0);
+		id |= (backupAvailable.isPresent() ? 1 << 7 : 0);
+		id |= (ipv6Support.isPresent() ? 1 << 8 : 0);
+		return id;
+	}
 
 	@Override
 	public String toString() {

@@ -6,12 +6,22 @@ public class DoubleAgent extends Agent {
 		super(minPrice, maxPrice, product);
 	}
 
+	/**
+	 * Buyer specifies the maximum price to pay.
+	 * 
+	 * @return
+	 */
 	public int getBuyerBid() {
-		return minPrice;
+		return maxPrice;
 	}
 
+	/**
+	 * Seller wants at least the returned price.
+	 * 
+	 * @return
+	 */
 	public int getSellerPrice() {
-		return maxPrice;
+		return minPrice;
 	}
 
 }
