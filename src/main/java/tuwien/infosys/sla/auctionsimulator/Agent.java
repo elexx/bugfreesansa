@@ -1,5 +1,7 @@
 package tuwien.infosys.sla.auctionsimulator;
 
+import com.google.common.base.Objects;
+
 public abstract class Agent {
 
 	protected static final int BIDDING_STEP = 10;
@@ -18,4 +20,14 @@ public abstract class Agent {
 		return product;
 	}
 
+	@Override
+	public String toString() {
+		// @formatter:off
+        return Objects.toStringHelper(this)
+                .add("minPrice", minPrice)
+                .add("maxPrice", maxPrice)
+                .add("product", product)
+                .toString();
+        // @formatter:on
+	}
 }

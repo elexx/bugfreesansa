@@ -17,12 +17,12 @@ public class ProductGenerator {
 		this.random = random;
 	}
 
-
 	/**
 	 * Generates a {@link Product}, filled with random parameter values.
 	 * 
 	 * @param parameterAmount
-	 *            the number of set parameters of the returned Product (between 3 and 9)
+	 *            the number of set parameters of the returned Product (between
+	 *            3 and 9)
 	 * 
 	 * @return the generated Product
 	 */
