@@ -1,5 +1,7 @@
 package tuwien.infosys.sla.auctionsimulator;
 
+import java.util.Random;
+
 
 public class SimulatorMain {
 
@@ -39,14 +41,18 @@ public class SimulatorMain {
 //		market.registerInterestReverseEnglish(seller2);
 		
 		
-		DoubleAgent dseller1 = new DoubleAgent(100, 200, ProductBuilder.newBuilder().availability(90).backupAvailable(true).cpu(4).build());
-		DoubleAgent dseller2 = new DoubleAgent(50, 120, ProductBuilder.newBuilder().availability(85).ipv6Support(true).cpu(4).build());
-		DoubleAgent dbuyer1 =  new DoubleAgent(80, 160, ProductBuilder.newBuilder().availability(90).backupAvailable(true).cpu(4).build());
-		
-		market.registerInterestDoubleSeller(dseller1);
-		market.registerInterestDoubleSeller(dseller2);
-		market.registerInterestDoubleBuyer(dbuyer1);
-		market.runDoubleAuction();
+//		DoubleAgent dseller1 = new DoubleAgent(100, 200, ProductBuilder.newBuilder().availability(90).backupAvailable(true).cpu(4).build());
+//		DoubleAgent dseller2 = new DoubleAgent(50, 120, ProductBuilder.newBuilder().availability(85).ipv6Support(true).cpu(4).build());
+//		DoubleAgent dbuyer1 =  new DoubleAgent(80, 160, ProductBuilder.newBuilder().availability(90).backupAvailable(true).cpu(4).build());
+//		
+//		market.registerInterestDoubleSeller(dseller1);
+//		market.registerInterestDoubleSeller(dseller2);
+//		market.registerInterestDoubleBuyer(dbuyer1);
+//		market.runDoubleAuction();
+		Random random = new Random();
+		double r = (random.nextInt(120-80)+80)/100.0D;
+		System.out.println(r);
+		System.out.println(Math.pow(2, (99/10.0D)) * ((random.nextInt(120-80)+80)/100.0D));
 	}
 
 }
