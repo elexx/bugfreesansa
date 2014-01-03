@@ -180,4 +180,8 @@ public class Market {
 		return dutchStatistics;
 	}
 
+	public MarketStatistics getDoubleStatistics() {
+		return doubleStatistics;
+	}
+
 }

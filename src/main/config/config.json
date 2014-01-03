@@ -1,0 +1,11 @@
+{
+	"englishAgents":[20,20],
+	"dutchAgents":[100,60],
+	"doubleAgents":[100,60],
+	"englishBuyerRatio":0.5,
+	"dutchBuyerRatio":0.5,
+	"doubleBuyerRatio":0.5,
+	"minParamAmount":3,
+	"maxParamAmount":3,
+	"doubleAuctionInterval":1
+}
