@@ -102,8 +102,8 @@ public class ProductGenerator {
 		return ProductGenerator.LATENCY[random.nextInt(ProductGenerator.LATENCY.length)];
 	}
 
-	private OperatingSystems genOperatingSystem() {
-		return OperatingSystems.fromValue(random.nextInt(3) + 1);
+	private OperatingSystem genOperatingSystem() {
+		return OperatingSystem.fromValue(random.nextInt(3) + 1);
 	}
 
 	private boolean genBackupAvailable() {

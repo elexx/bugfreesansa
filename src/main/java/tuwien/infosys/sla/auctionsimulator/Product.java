@@ -11,11 +11,11 @@ public class Product {
 	public final Optional<Integer> ram;
 	public final Optional<Integer> storage;
 	public final Optional<Integer> latency;
-	public final Optional<OperatingSystems> operatingSystem;
+	public final Optional<OperatingSystem> operatingSystem;
 	public final Optional<Boolean> backupAvailable;
 	public final Optional<Boolean> ipv6Support;
 
-	public Product(Optional<Integer> availability, Optional<Integer> bandwith, Optional<Integer> cpu, Optional<Integer> ram, Optional<Integer> storage, Optional<Integer> latency, Optional<OperatingSystems> operatingSystem, Optional<Boolean> backupAvailable, Optional<Boolean> ipv6Support) {
+	public Product(Optional<Integer> availability, Optional<Integer> bandwith, Optional<Integer> cpu, Optional<Integer> ram, Optional<Integer> storage, Optional<Integer> latency, Optional<OperatingSystem> operatingSystem, Optional<Boolean> backupAvailable, Optional<Boolean> ipv6Support) {
 		this.availability = availability;
 		this.bandwith = bandwith;
 		this.cpu = cpu;
@@ -72,7 +72,7 @@ public class Product {
 		return true;
 	}
 
-	private static boolean matchOperatingSystem(Optional<OperatingSystems> p1, Optional<OperatingSystems> p2) {
+	private static boolean matchOperatingSystem(Optional<OperatingSystem> p1, Optional<OperatingSystem> p2) {
 		if (p1.isPresent()) {
 			return p2.isPresent() && p1.get().equals(p2.get());
 		}

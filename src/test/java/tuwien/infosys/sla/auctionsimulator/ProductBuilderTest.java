@@ -141,7 +141,7 @@ public class ProductBuilderTest {
 		builder.latency(10);
 		assertThat(builder.size(), is(6));
 
-		builder.operatingSystem(OperatingSystems.LINUX);
+		builder.operatingSystem(OperatingSystem.LINUX);
 		assertThat(builder.size(), is(7));
 
 		builder.backupAvailable(true);

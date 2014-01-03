@@ -19,7 +19,7 @@ public class ProductBuilder {
 	private Integer ram;
 	private Integer storage;
 	private Integer latency;
-	private OperatingSystems operatingSystem;
+	private OperatingSystem operatingSystem;
 	private Boolean backupAvailable;
 	private Boolean ipv6Support;
 
@@ -66,7 +66,7 @@ public class ProductBuilder {
 		return this;
 	}
 
-	public ProductBuilder operatingSystem(OperatingSystems operatingSystem) {
+	public ProductBuilder operatingSystem(OperatingSystem operatingSystem) {
 		this.operatingSystem = operatingSystem;
 		return this;
 	}
