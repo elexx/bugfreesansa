@@ -32,7 +32,8 @@ public class ReverseEnglishAgent extends Agent implements SupplyDemandAuctionabl
 				if (bid.isPresent() && bid.get() < currentPrice) {
 					currentPrice = bid.get();
 				} else {
-					agentIterator.remove();
+					if(takers.size()!=1)
+						agentIterator.remove();
 				}
 			}
 		} while (takers.size() > 1);
